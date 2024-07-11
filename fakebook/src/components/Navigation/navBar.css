@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Klavika;
+    src: url(../../../public/fonts/KlavikaBoldBold.otf);
+}
+
 .navBarBox{
     height: 50px;
     width: 100%;
@@ -23,14 +28,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 20px;
+    margin-left: 40px;
 }
 .navBarIcon{
-    margin-left: 10px;
+    margin-left: 15px;
 }
 .navBarLinks{
-    margin-left: 10px;
-    font-size: 20px;
+    margin-left: 40px;
+    font-size: 15px;
+    font-family: klavika;
     cursor: pointer;
     font-weight: bold;
 }
@@ -44,6 +50,8 @@
     color: white;
     position: absolute;
     border-radius: 50%;
+    display: flex;
+    top: 3px;
     justify-content: center;
 }
 .profilePicImg{
@@ -51,10 +59,11 @@
     height: 32px;
     object-fit: cover;
     border-radius: 50%;
-    margin-left: 50px;
+    margin-left: 90px;
 }
 .logo{
     font-size: 35px;
+    font-family: Klavika;
     margin-left: 10px;
     font-weight: bold;
     color: white;
