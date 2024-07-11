@@ -1,0 +1,89 @@
+@font-face {
+    font-family: Klavika;
+    src: url(../../../public/fonts/KlavikaBoldBold.otf);
+}
+
+.navBarBox{
+    height: 50px;
+    width: 100%;
+    background-color: #3b5998;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top:0;
+}
+.navBarLeft{
+    flex: 3;
+}
+.navBarCenter{
+    flex: 5;
+}
+.navBarRight{
+    flex:4;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+.navBarIcons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 40px;
+}
+.navBarIcon{
+    margin-left: 15px;
+}
+.navBarLinks{
+    margin-left: 40px;
+    font-size: 15px;
+    font-family: klavika;
+    cursor: pointer;
+    font-weight: bold;
+}
+.navBarLink{
+    margin-left: 10px;
+}
+.iconTag{
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    color: white;
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    top: 3px;
+    justify-content: center;
+}
+.profilePicImg{
+    width: 38px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 90px;
+}
+.logo{
+    font-size: 35px;
+    font-family: Klavika;
+    margin-left: 10px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+.searchBarBox{
+    widows: 100%;
+    height: 30px;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+}
+.searchIcon{
+    margin-left: 10px;
+}
+.searchInput{
+    border: none;
+    width: 80%;
+}
+.searchInput:focus{
+    outline: none;
+}
