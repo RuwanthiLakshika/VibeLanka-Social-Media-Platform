@@ -4,16 +4,30 @@
     border-radius: 50%;
     object-fit: cover;
 }
+.post{
+    font-family: sans-serif;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
+    margin:30px 0;
+    margin-left: 10px;
+    border-radius: 10px;
+}
 .postTop{
     margin-top: 10px;
     display: flex;
     align-items: center;
 }
 .postUserName{
-    font-style: 15px;
+    font-size: 15px;
     font-weight: 500;
     margin: 0 10px;
 }
 .postTime{
-    font-style: 10px;
+    font-size: 10px;
+}
+.postedImage{
+    width:98%;
+    background-size: cover;
+    margin-left: 5px;
 }
