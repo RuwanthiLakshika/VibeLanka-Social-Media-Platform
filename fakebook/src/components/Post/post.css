@@ -1,0 +1,19 @@
+.postImage{
+    width:32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.postTop{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+.postUserName{
+    font-style: 15px;
+    font-weight: 500;
+    margin: 0 10px;
+}
+.postTime{
+    font-style: 10px;
+}
