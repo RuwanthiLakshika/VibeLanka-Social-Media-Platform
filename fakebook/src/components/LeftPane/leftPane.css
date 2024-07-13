@@ -2,6 +2,9 @@
     flex: 2;
     height: calc(100vh - 50px);
     overflow-y: scroll;
+    font-family: sans-serif;
+    position: sticky;
+    top: 50px;
 }
 ::-webkit-scrollbar {
     width: 5px;
