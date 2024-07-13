@@ -10,9 +10,7 @@
     height: 180px;
     margin-top: 10px;
     margin-left: 10px;
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .addPostContainer{
     padding: 15px;
