@@ -42,6 +42,17 @@ app.get('/getImage', async (req, res) => {
   }
 });
 
+app.delete('/deleteImage/:id', async (req, res) => {
+  try {
+    const user = await prisma.user.delete({
+      where: { id: parseInt(req.params.id) },
+    });
+    res.json(user);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 app.listen(3001, () => {
   console.log('Server started');
 });

@@ -69,3 +69,33 @@
     border-bottom: 1px dashed grey;
     cursor: pointer;
 }
+.postTopRight{
+    cursor: pointer;
+    margin-left: 405px;
+    margin-top: 10px;
+}
+.dropdownItem{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 3px 7px;
+    margin-right: 5px;
+
+}
+.confirmationBox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.confirmationBox p {
+    margin-bottom: 10px;
+}
+
+.confirmationBox button {
+    margin-right: 10px;
+}
