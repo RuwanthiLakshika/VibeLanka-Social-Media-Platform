@@ -1,23 +1,24 @@
 import React from 'react'
 import './post.css'
 
-export default function Post() {
+export default function Post({ image, userName, postTime, postCaption }) {
   return (
     <div className='post'>
         <div className="postContainer">
             <div className="postTop">
                 <div className="postTopLeft">
                 <img src="/images/post3.jpg" alt="" className="postImage" />
-                <span className="postUserName">Ruwanthi Lakshika</span>
-                <span className="postTime">5 mins ago</span>
+                <span className="postUserName">{userName}</span>
+                <span className="postTime">{postTime}</span>
                 </div>
             </div>
             <div className="postCenter">
                 <div className="postCaption">
-                🌟✨ "Embrace the journey of becoming the best version of yourself. 
-                Every step, every challenge, and every triumph shapes who you are and who you're meant to be. 💫💖
+                    {postCaption}
                 </div>
-                <img src="./images/post3.jpg" alt="" className="postedImage" />
+                {image && (
+                    <img src={`http://localhost:3001/images/${image}`} alt="" className="postedImage" />
+                )}
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">

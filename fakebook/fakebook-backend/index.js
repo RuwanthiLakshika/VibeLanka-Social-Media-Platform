@@ -1,17 +1,47 @@
 const express = require('express');
-const postRoutes = require('./routes/postRoutes');
+const cors = require('cors');
+const multer = require('multer');
+const path = require('path');
+const { PrismaClient } = require('@prisma/client');
+
+const prisma = new PrismaClient();
 const app = express();
-const port = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
-// Routes
-app.use('/posts', postRoutes);
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/images');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  },
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const upload = multer({ storage: storage });
+
+app.post('/upload', upload.single('file'), async (req, res) => {
+  try {
+    const user = await prisma.user.create({
+      data: { image: req.file.filename },
+    });
+    res.json(user);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+app.get('/getImage', async (req, res) => {
+  try {
+    const users = await prisma.user.findMany();
+    res.json(users);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+app.listen(3001, () => {
+  console.log('Server started');
 });
