@@ -1,7 +1,23 @@
 import React from 'react'
 import './post.css'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+
 
 export default function Post() {
+    const [image, setImage] = useState('')
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/getImage')
+            .then(res => {
+                if (res.data && res.data.length > 0) {
+                    setImage(res.data[0].image);
+                }
+            })
+            .catch(err => console.log(err));
+    }, []);
+    
+
   return (
     <div className='post'>
         <div className="postContainer">
@@ -17,7 +33,9 @@ export default function Post() {
                 🌟✨ "Embrace the journey of becoming the best version of yourself. 
                 Every step, every challenge, and every triumph shapes who you are and who you're meant to be. 💫💖
                 </div>
-                <img src="./images/post3.jpg" alt="" className="postedImage" />
+                 {image && (
+                        <img src={`http://localhost:3001/images/${image}`} alt="" className="postedImage" />
+                    )}
             </div>
             <div className="postBottom">
                 <div className="postBottomLeft">
