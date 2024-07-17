@@ -6,7 +6,6 @@ import Posts from '../Posts/Posts';
 export default function PostPane() {
   return (
     <div className='postPaneBox'>
-      <AddPost />
       <Posts />
       
     </div>
