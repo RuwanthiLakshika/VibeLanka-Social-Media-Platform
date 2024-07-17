@@ -23,12 +23,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.post('/upload', upload.single('file'), async (req, res) => {
+  const { caption } = req.body;
   try {
     const user = await prisma.user.create({
-      data: { image: req.file.filename },
+      data: { 
+        image: req.file.filename,
+        caption: caption,
+       },
     });
-    const postTime = new Date().toISOString(); 
-    res.json(user, postTime);
+    res.json({ user, postTime }); 
   } catch (err) {
     res.json(err);
   }
