@@ -18,6 +18,16 @@ export default function Post({ image, userName, postTime, postCaption, onDelete 
         setShowOptions(false)
     }
 
+    const formattedTime = new Date(postTime).toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    });
+
   return (
     <div className='post'>
         <div className="postContainer">
@@ -25,7 +35,7 @@ export default function Post({ image, userName, postTime, postCaption, onDelete 
                 <div className="postTopLeft">
                 <img src="/images/1.jpeg" alt="" className="postImage" />
                 <span className="postUserName">{userName}</span>
-                <span className="postTime">{postTime}</span>
+                <span className="postTime">{formattedTime}</span>
                 </div>
                 <div className="postTopRight">
                 <MoreHorizIcon onClick={() => setShowOptions(!showOptions)} className="moreOptionsIcon" />

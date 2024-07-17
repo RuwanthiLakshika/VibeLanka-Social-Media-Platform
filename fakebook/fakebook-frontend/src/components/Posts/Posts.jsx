@@ -4,29 +4,33 @@ import Post from '../Post/Post'
 
 
 export default function Posts() {
-    const [images, setImages] = useState([])
+    const [posts, setPosts] = useState([])
 
     useEffect(() => {
         axios.get('http://localhost:3001/getImage')
             .then(res => {
                 if (res.data && res.data.length > 0) {
                     console.log('Fetched Images:', res.data);
-                    setImages(res.data);
+                    const postsWithTime = res.data.reverse().map(imageData => ({
+                        ...imageData,
+                        postTime: imageData.postTime || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                    }));
+                    setPosts(postsWithTime);
                 }
             })
             .catch(err => console.log(err));
     }, []); 
 
     const userName = "Ruwanthi Lakshika";
-    const postTime = "5 mins ago";
     const postCaption = `🌟✨ "Embrace the journey of becoming the best version of yourself. 
         Every step, every challenge, and every triumph shapes who you are and who you're meant to be. 💫💖`;
+
 
     const handleDelete = (id) => {
         axios.delete(`http://localhost:3001/deleteImage/${id}`)
             .then(res => {
                 if (res.status === 200) {
-                    setImages(images.filter(image => image.id !== id));
+                    setPosts(posts.filter(post => post.id !== id));
                 }
             })
             .catch(err => console.log(err));
@@ -34,14 +38,14 @@ export default function Posts() {
 
   return (
     <div className='posts'>
-        {images.map((imageData, index) => (
+        {posts.map((post, index) => (
             <Post 
                 key={index} 
-                image={imageData.image} 
+                image={post.image} 
                 userName={userName} 
-                postTime={postTime} 
+                postTime={post.postTime} 
                 postCaption={postCaption} 
-                onDelete={() => handleDelete(imageData.id)}
+                onDelete={() => handleDelete(post.id)}
             />
         ))}
     </div>
