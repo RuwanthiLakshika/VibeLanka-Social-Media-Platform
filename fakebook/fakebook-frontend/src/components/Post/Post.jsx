@@ -59,11 +59,11 @@ export default function Post({ image, userName, postTime, postCaption, onDelete 
                     <img src="/images/like.svg" alt="" className="reactionPic" />
                     <img src="/images/love.svg" alt="" className="reactionPic" />
                     <img src="/images/haha.svg" alt="" className="reactionPic" />
-                    <span className="likeCount">Ruwanthi 255 others</span>
+                    <span className="likeCount">Ruwanthi 0 others</span>
                 </div>
                 <div className="postBottomRight">
                     <span className="commentCount">
-                        15 comments
+                        0 comments
                     </span>
                 </div>
             </div>

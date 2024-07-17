@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Post from '../Post/Post'
+import AddPost from '../AddPost/AddPost'
 
 
 export default function Posts() {
@@ -12,8 +13,10 @@ export default function Posts() {
                 if (res.data && res.data.length > 0) {
                     console.log('Fetched Images:', res.data);
                     const postsWithTime = res.data.reverse().map(imageData => ({
-                        ...imageData,
-                        postTime: imageData.postTime || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                        id: imageData.id,
+                        image: imageData.image,
+                        postTime: imageData.postTime || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                        caption: imageData.caption
                     }));
                     setPosts(postsWithTime);
                 }
@@ -22,9 +25,10 @@ export default function Posts() {
     }, []); 
 
     const userName = "Ruwanthi Lakshika";
-    const postCaption = `🌟✨ "Embrace the journey of becoming the best version of yourself. 
-        Every step, every challenge, and every triumph shapes who you are and who you're meant to be. 💫💖`;
 
+    const handleAddPost = (newPost) => {
+        setPosts([newPost, ...posts]); 
+    };
 
     const handleDelete = (id) => {
         axios.delete(`http://localhost:3001/deleteImage/${id}`)
@@ -38,15 +42,16 @@ export default function Posts() {
 
   return (
     <div className='posts'>
-        {posts.map((post, index) => (
-            <Post 
-                key={index} 
-                image={post.image} 
-                userName={userName} 
-                postTime={post.postTime} 
-                postCaption={postCaption} 
-                onDelete={() => handleDelete(post.id)}
-            />
+         <AddPost onAddPost={handleAddPost} />
+         {posts.map((post,index) => (
+                <Post 
+                    key={index} 
+                    image={post.image} 
+                    userName={userName} 
+                    postTime={post.postTime} 
+                    postCaption={post.caption} 
+                    onDelete={() => handleDelete(post.id)}
+                />
         ))}
     </div>
   )

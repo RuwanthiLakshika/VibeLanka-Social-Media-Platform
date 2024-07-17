@@ -7,9 +7,10 @@ import LiveTvIcon from '@mui/icons-material/LiveTv';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 
-export default function AddPost() {
+export default function AddPost({ onAddPost }) {
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
+    const [caption, setCaption] = useState('');
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -25,6 +26,7 @@ export default function AddPost() {
 
         const formData = new FormData();
         formData.append('file', file);
+        formData.append('caption', caption); 
 
         try {
             const res = await axios.post('http://localhost:3001/upload', formData, {
@@ -33,25 +35,34 @@ export default function AddPost() {
                 }
             });
             console.log(res.data);
+            onAddPost({ image: res.data.image, caption: caption });
         } catch (err) {
             console.error(err);
         }
         setFile(null);
         setPreview(null);
+        setCaption('');
         window.location.reload();
     };
 
     const handleClosePreview = () => {
         setFile(null);
         setPreview(null);
-    };
+    };      
+    
 
     return (
         <div className='addPost'>
             <div className="addPostContainer">
                 <div className="addPostTop">
                     <img src="./images/1.jpeg" alt="" className="addPostPic" />
-                    <input placeholder="What's in your mind...?" type="text" className="addPostInput" />
+                    <input
+                        placeholder="What's in your mind...?"
+                        type="text"
+                        className="addPostInput"
+                        value={caption}
+                        onChange={(e) => setCaption(e.target.value)}
+                    />
                 </div>
                 <hr className='postHr' />
                 {preview && (
