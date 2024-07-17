@@ -9,6 +9,7 @@ generator client {
 
 model User {
   id    Int    @id @default(autoincrement())
-  image String? // Optional field
+  image String? 
+  postTime DateTime @default(now())
 }
 

@@ -27,7 +27,8 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const user = await prisma.user.create({
       data: { image: req.file.filename },
     });
-    res.json(user);
+    const postTime = new Date().toISOString(); 
+    res.json(user, postTime);
   } catch (err) {
     res.json(err);
   }
