@@ -4,13 +4,17 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
+import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 
 export default function AddPost() {
     const [file, setFile] = useState(null);
+    const [preview, setPreview] = useState(null);
 
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
+        const selectedFile = e.target.files[0];
+        setFile(selectedFile);
+        setPreview(URL.createObjectURL(selectedFile));
     };
 
     const handleUpload = async (e) => {
@@ -32,6 +36,14 @@ export default function AddPost() {
         } catch (err) {
             console.error(err);
         }
+        setFile(null);
+        setPreview(null);
+        window.location.reload();
+    };
+
+    const handleClosePreview = () => {
+        setFile(null);
+        setPreview(null);
     };
 
     return (
@@ -42,6 +54,12 @@ export default function AddPost() {
                     <input placeholder="What's in your mind...?" type="text" className="addPostInput" />
                 </div>
                 <hr className='postHr' />
+                {preview && (
+                        <div className="previewContainer">
+                            <img src={preview} alt="Preview" className="imagePreview" />
+                            <CloseIcon className="closeIcon" onClick={handleClosePreview} />
+                        </div>
+                    )}
                 <div className="addPostBottom">
                     <div className="addPostOptions">
                         <div className="addPostOption" onClick={() => document.getElementById('fileInput').click()}>
@@ -67,8 +85,10 @@ export default function AddPost() {
                         style={{ display: 'none' }}
                         onChange={handleFileChange}
                     />
+                    
                     <button className="postButton" onClick={handleUpload}>Post</button>
                 </div>
+               
             </div>
         </div>
     );
