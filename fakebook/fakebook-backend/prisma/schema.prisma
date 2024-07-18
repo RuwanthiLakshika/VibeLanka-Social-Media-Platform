@@ -12,5 +12,6 @@ model User {
   image           String? 
   postTime        DateTime @default(now())
   caption         String?
+  location        String?
 }
 

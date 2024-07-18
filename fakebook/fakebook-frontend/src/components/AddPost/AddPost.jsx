@@ -6,11 +6,14 @@ import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
+import { useRef } from 'react';
 
 export default function AddPost({ onAddPost }) {
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [caption, setCaption] = useState('');
+    const [location, setLocation] = useState('');
+    const statusRef = useRef(null);
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -27,6 +30,7 @@ export default function AddPost({ onAddPost }) {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('caption', caption); 
+        formData.append('location', location);
 
         try {
             const res = await axios.post('http://localhost:3001/upload', formData, {
@@ -35,20 +39,55 @@ export default function AddPost({ onAddPost }) {
                 }
             });
             console.log(res.data);
-            onAddPost({ image: res.data.image, caption: caption });
+            onAddPost({ image: res.data.image, caption: caption, location: location });
         } catch (err) {
             console.error(err);
         }
         setFile(null);
         setPreview(null);
         setCaption('');
+        setLocation('');
         window.location.reload();
     };
 
     const handleClosePreview = () => {
         setFile(null);
         setPreview(null);
-    };      
+    };
+    
+    const findMyState=()=>{
+
+        const status = statusRef.current; 
+    
+        const success=(position)=>{
+            console.log(position)
+            const latitude=position.coords.latitude;
+            const longitude=position.coords.longitude;
+            console.log(latitude +' ' + longitude)
+    
+            const geoApiUrl=`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+        
+            fetch(geoApiUrl)
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data);
+                const locationString = `${data.locality}, ${data.principalSubdivision}, ${data.countryName}`;
+                if (status) { 
+                    status.textContent = `your current location is ${data.locality}, ${data.principalSubdivision}, ${data.countryName}`;
+                }
+                setLocation(locationString);
+            })
+        }
+    
+        const error=()=>{
+            if (status) { 
+                status.textContent = 'Unable to retrieve your location';
+            }
+        }
+    
+        navigator.geolocation.getCurrentPosition(success,error);
+    }
+    
     
 
     return (
@@ -65,6 +104,7 @@ export default function AddPost({ onAddPost }) {
                     />
                 </div>
                 <hr className='postHr' />
+                <p className="status" ref={statusRef}></p>
                 {preview && (
                         <div className="previewContainer">
                             <img src={preview} alt="Preview" className="imagePreview" />
@@ -77,7 +117,7 @@ export default function AddPost({ onAddPost }) {
                             <InsertPhotoIcon htmlColor='orange' className='addPhoto' />
                             <span className="addPostText">Add Photo/Video</span>
                         </div>
-                        <div className="addPostOption">
+                        <div className="addPostOption" onClick={findMyState}>
                             <AddLocationAltIcon htmlColor='red' className='addPhoto' />
                             <span className="addPostText">Add Location</span>
                         </div>

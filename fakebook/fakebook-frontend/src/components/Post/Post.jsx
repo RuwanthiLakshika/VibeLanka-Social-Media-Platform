@@ -3,7 +3,7 @@ import './post.css'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useState } from 'react';
 
-export default function Post({ image, userName, postTime, postCaption, onDelete }) {
+export default function Post({ image, userName, postTime, postCaption, onDelete, postLocation }) {
     const [showOptions, setShowOptions] = useState(false)
     const [showConfirm, setShowConfirm] = useState(false)
 
@@ -46,10 +46,14 @@ export default function Post({ image, userName, postTime, postCaption, onDelete 
                         )}
                 </div>
             </div>
+            <div className="postLocation">
+                    {postLocation}
+                </div>
             <div className="postCenter">
                 <div className="postCaption">
                     {postCaption}
                 </div>
+                
                 {image && (
                     <img src={`http://localhost:3001/images/${image}`} alt="" className="postedImage" />
                 )}
