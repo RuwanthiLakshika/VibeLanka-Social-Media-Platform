@@ -16,7 +16,8 @@ export default function Posts() {
                         id: imageData.id,
                         image: imageData.image,
                         postTime: imageData.postTime || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                        caption: imageData.caption
+                        caption: imageData.caption,
+                        location: imageData.location
                     }));
                     setPosts(postsWithTime);
                 }
@@ -50,6 +51,7 @@ export default function Posts() {
                     userName={userName} 
                     postTime={post.postTime} 
                     postCaption={post.caption} 
+                    postLocation={post.location}
                     onDelete={() => handleDelete(post.id)}
                 />
         ))}
