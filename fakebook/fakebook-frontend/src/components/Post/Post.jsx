@@ -46,13 +46,14 @@ export default function Post({ image, userName, postTime, postCaption, onDelete,
                         )}
                 </div>
             </div>
+            <div className="postLocation">
+                    {postLocation}
+                </div>
             <div className="postCenter">
                 <div className="postCaption">
                     {postCaption}
                 </div>
-                <div className="postLocation">
-                    {postLocation}
-                </div>
+                
                 {image && (
                     <img src={`http://localhost:3001/images/${image}`} alt="" className="postedImage" />
                 )}
