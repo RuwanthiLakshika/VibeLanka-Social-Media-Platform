@@ -10,7 +10,7 @@ export default function NavBar() {
    <div className="navBarBox">
     
     <div className="navBarLeft">
-        <span className='logo'>fakebook</span>
+        <img src="/images/vibeLanka.png" alt="" className="logopic" />
     </div>
 
     <div className="navBarCenter">
