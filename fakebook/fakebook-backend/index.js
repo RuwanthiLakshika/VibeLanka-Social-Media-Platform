@@ -3,9 +3,13 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 const { PrismaClient } = require('@prisma/client');
+const http = require('http');
+const socketIo = require('socket.io');
 
 const prisma = new PrismaClient();
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
 app.use(cors());
 app.use(express.json());
@@ -56,6 +60,21 @@ app.delete('/deleteImage/:id', async (req, res) => {
   } catch (err) {
     res.json(err);
   }
+});
+
+// WebSocket implementation for Go Live feature
+io.on('connection', (socket) => {
+  socket.on('broadcaster', (data) => {
+    socket.broadcast.emit('viewer', data);
+  });
+
+  socket.on('viewer', (data) => {
+    socket.broadcast.emit('broadcaster', data);
+  });
+
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('disconnectPeer');
+  });
 });
 
 app.listen(3001, () => {
