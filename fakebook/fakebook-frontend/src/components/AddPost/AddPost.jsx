@@ -7,12 +7,14 @@ import LiveTvIcon from '@mui/icons-material/LiveTv';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import { useRef } from 'react';
+import GoLive from '../GoLive/GoLive';
 
 export default function AddPost({ onAddPost }) {
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [caption, setCaption] = useState('');
     const [location, setLocation] = useState('');
+    const [isLive, setIsLive] = useState(false); 
     const statusRef = useRef(null);
 
     const handleFileChange = (e) => {
@@ -53,6 +55,14 @@ export default function AddPost({ onAddPost }) {
     const handleClosePreview = () => {
         setFile(null);
         setPreview(null);
+    };
+
+    const handleGoLive = () => {
+        setIsLive(true);
+    };
+
+    const handleCloseLive = () => {
+        setIsLive(false);
     };
     
     const findMyState=()=>{
@@ -125,7 +135,7 @@ export default function AddPost({ onAddPost }) {
                             <LocalOfferIcon htmlColor='blue' className='addPhoto' />
                             <span className="addPostText">Add Tag</span>
                         </div>
-                        <div className="addPostOption">
+                        <div className="addPostOption" onClick={handleGoLive}>
                             <LiveTvIcon htmlColor='tomato' className='addPhoto' />
                             <span className="addPostText">Go Live</span>
                         </div>
@@ -141,6 +151,7 @@ export default function AddPost({ onAddPost }) {
                 </div>
                
             </div>
+            {isLive && <GoLive onClose={handleCloseLive} />}
         </div>
     );
 }
