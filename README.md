@@ -14,7 +14,8 @@
 
 🔧 Tech Highlights:
 
-Multer for secure image uploads
-Geolocation for accurate location tracking
-WebRTC for seamless live video streaming
+Multer for secure image uploads     
+Geolocation for accurate location tracking   
+WebRTC for seamless live video streaming    
+
 Dive into the future of social media with VibeLanka and experience the innovation firsthand! 🌟
